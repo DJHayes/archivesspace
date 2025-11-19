@@ -1416,7 +1416,7 @@ describe 'Agents', js: true do
       let(:initial_sort) { [record_1_name, record_2_name] }
       let(:additional_browse_columns) do
         {
-          # 6 => 'Is User?',
+          6 => 'Is User?',
           7 => 'URI',
           # 8 => 'Published'
         }
@@ -1428,7 +1428,7 @@ describe 'Agents', js: true do
           'Authority ID' => 'authority_id',
           'Source' => 'source',
           'Rules' => 'rules',
-          # 'Is User?' => 'is_user',
+          'Is User?' => 'is_user',
           'URI' => 'uri',
           # 'Published' => 'publish',
         }
@@ -1455,12 +1455,14 @@ describe 'Agents', js: true do
             asc: [record_2_name, record_1_name],
             desc: [record_1_name, record_2_name]
           },
-          # is_user is waiting for the coming ANW-2540 fix
-          # 'is_user' => {
-          #   asc: [record_1_name, record_2_name],
-          #   desc: [record_1_name, record_2_name]
-          # },
+
+          'is_user' => {
+            # is_user is false for both records and doesn't change order for some reason
+            asc: [record_1_name, record_2_name],
+            desc: [record_1_name, record_2_name]
+          },
           'uri' => {
+            # uris have different base strings, so sort by string unlike most record types
             asc: [record_2_name, record_1_name],
             desc: [record_1_name, record_2_name]
           },
